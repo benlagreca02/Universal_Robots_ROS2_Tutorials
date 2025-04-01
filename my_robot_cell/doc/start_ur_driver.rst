@@ -50,11 +50,11 @@ Extract the calibration
 
 One very important step is to extract the robot's specific calibration and save it to our
 workcell's startup package. For details, please refer to `our documentation on extracting the calibration information <https://docs.ros.org/en/ros2_packages/rolling/api/ur_robot_driver/installation/robot_setup.html#extract-calibration-information>`_.
-For now, we just copy the default one for the ur20.
+For now, we just copy the default one for the ur5e.
 
 .. code-block::
 
-   cp $(ros2 pkg prefix ur_description)/share/ur_description/config/ur20/default_kinematics.yaml \
+   cp $(ros2 pkg prefix ur_description)/share/ur_description/config/ur5e/default_kinematics.yaml \
      my_robot_cell_control/config/my_robot_calibration.yaml
 
 
@@ -80,9 +80,9 @@ With this we could start our workcell using
       description_launchfile:=$(ros2 pkg prefix my_robot_cell_control)/share/my_robot_cell_control/launch/rsp.launch.py \
       use_mock_hardware:=true \
       robot_ip:=123 \
-      ur_type:=ur20 \
+      ur_type:=ur5e \
       rviz_config_file:=$(ros2 pkg prefix my_robot_cell_description)/share/my_robot_cell_description/rviz/urdf.rviz \
-      tf_prefix:=ur20_
+      tf_prefix:=ur5e
 
 Create start_robot launchfile
 -----------------------------

@@ -3,15 +3,18 @@
 
   <!--First, include the macro from our custom description-->
   <xacro:include filename="$(find my_robot_cell_description)/urdf/my_robot_cell_macro.xacro"/>
+
   <!--The driver already provides a control tag for the UR arm, we can directly include-->
-  <xacro:include filename="$(find ur_robot_driver)/urdf/ur.ros2_control.xacro"/>
+  <!-- I think this is what's giving me lots of issues... -->
+  <!-- <xacro:include filename="$(find ur_robot_driver)/urdf/ur.ros2_control.xacro"/> -->
+  <xacro:include filename="$(find ur_description)/urdf/ur.ros2_control.xacro"/>
 
   <!--We need to specify the arguments used for parametrizing our description-->
-  <xacro:arg name="ur_type" default="ur20"/>
+  <xacro:arg name="ur_type" default="ur5e"/>
   <xacro:arg name="joint_limit_parameters_file" default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"/>
-  <xacro:arg name="kinematics_parameters_file" default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
   <xacro:arg name="physical_parameters_file" default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml"/>
   <xacro:arg name="visual_parameters_file" default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
+  <xacro:arg name="kinematics_parameters_file" default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
 
   <xacro:arg name="robot_ip" default="0.0.0.0"/>
   <xacro:arg name="headless_mode" default="false" />
@@ -24,6 +27,7 @@
   <link name="world" />
 
   <!--Create the scene description including the robot-->
+  <!-- this hsould include the table, and end effector aswell! -->
   <xacro:my_robot_cell
     parent="world"
     ur_type="$(arg ur_type)"
@@ -36,10 +40,12 @@
   </xacro:my_robot_cell>
 
   <!--Create the control tag for the UR robot-->
+
+  <!-- This is failing at the kinematics portion-->
   <xacro:ur_ros2_control
     name="$(arg ur_type)"
     tf_prefix="$(arg ur_type)_"
-    kinematics_parameters_file="$(arg kinematics_parameters_file)"
+    kinematics_parameters_file="$(arg kinematics_parameters_file)"  
     robot_ip="$(arg robot_ip)"
     script_filename="$(arg ur_script_filename)"
     output_recipe_filename="$(arg ur_output_recipe_filename)"

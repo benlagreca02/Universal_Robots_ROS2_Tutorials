@@ -2,7 +2,7 @@ Assembling the URDF
 ===================
 
 The `ur_description <https://github.com/UniversalRobots/Universal_Robots_ROS2_Description>`_ package provides `macro files <https://github.com/UniversalRobots/Universal_Robots_ROS2_Description/blob/rolling/urdf/ur_macro.xacro>`_ to generate an instance of a Universal Robots arm.
-We'll use this to create a custom workcell with a ur20 inside. In this section we will only go into
+We'll use this to create a custom workcell with a ur5e inside. In this section we will only go into
 detail about the URDF / xacro files, not the complete package structure. Please see the
 `description package source code
 <https://github.com/UniversalRobots/Universal_Robots_ROS2_Tutorials/blob/main/my_robot_cell/my_robot_cell_description>`_ for all other files assembling the description package.
@@ -32,7 +32,7 @@ we need to declare certain arguments that must be passed to the macro.
 
 .. literalinclude:: ../my_robot_cell_description/urdf/my_robot_cell.urdf.xacro
     :language: xml
-    :start-at:   <xacro:arg name="ur_type" default="ur20"/>
+    :start-at:   <xacro:arg name="ur_type" default="ur5e"/>
     :end-at:     <xacro:arg name="visual_parameters_file" default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
     :caption: my_robot_cell_description/urdf/my_robot_cell.urdf.xacro
 
@@ -62,7 +62,7 @@ The workcell macro is defined in the following manner:
 This macro provides an example of what a custom workcell could resemble. Your workspace will likely
 vary from this one. Please feel free to modify this portion of the URDF to match your own setup. In
 this instance, our workspace comprises a table in front of a wall, featuring a monitor, and the
-**ur20** robot arm mounted on top.
+**ur5e** robot arm mounted on top.
 
 Ensure that your custom workcell includes the parent link, which must be passed to the **ur_robot**
 macro. In this example, we chose to create a link named **robot_mount**.
